@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,37 +12,52 @@
     <!-- Own CSS -->
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Big+Shoulders+Text|Fascinate+Inline|Noto+Sans+JP|Roboto+Mono|Rubik&display=swap" rel="stylesheet">
-
-    
+    <link
+        href="https://fonts.googleapis.com/css?family=Big+Shoulders+Text|Fascinate+Inline|Noto+Sans+JP|Roboto+Mono|Rubik&display=swap"
+        rel="stylesheet">
 </head>
+
 <body>
-    
+
     <div id="#container">
 
-        <!-- Game Title -->
-        
+    <!-- Game Title -->
         <h1>Twin Peaks Trivia</h1>
 
-        <!-- Game Timer -->
+    <!-- Game Timer -->
         <div id="timer">
-            <!-- X. Time Left -->
-            <!-- Span: quest-timer-display -->
-            <!-- B. 10 Seconds for each question -->
+            <!-- A. Subtitle -->
+            <p>How well do you know Twin Peaks?</p>
+            <!-- B. "Time Left" -->
+            <!-- B. 15 Seconds for each question 
+                & Pause once user clicks 
+                OR when timer is at 0 -->
             <!-- C. 5 Seconds until next question -->
+            <!-- D. ??? -->
         </div>
 
-        <!-- Questions/Comments to User -->
-        <div id="">
+    <!-- Questions Div - Questions/Comments to User -->
+        <div id="questions">
             <!-- A. Rules of Play -->
-            <!-- B. # and Question -->
+            <div>
+                <h3>Rules of Play</h3>
+            </div>
+            <!-- B. Question -->
             <!-- C. Correct Answer -->
             <!-- D. Want to play again? -->
         </div>
 
-        <!-- Buttons and Correct Answers -->
-        <div id="">
-            <!-- A. Start Button -->
+    <!-- Results Div - Buttons and Correct Answers -->
+        <div id="results">
+            <!-- A. Rules, Start Button -->
+            <ul>
+                <li>There are 10 questions.</li>
+                <li>You have 30 seconds to answer each question.</li>
+                <li>- After each response, you will be given the correct answer.</li>
+                <li>- If you don't answer, the correct answer will be displayed once you've timed out.</li>
+                <li>You'll get your score when the game is over!</li>
+            </ul>
+            <button id="start-btn">Start!</button>
             <!-- B. Answers Button -->
             <!-- C. Fun Fact + Photo / Countdown to next question  -->
             <!-- D. Play Again Button -->
@@ -55,4 +71,5 @@
     <script src="assets/javascript/game.js"></script>
 
 </body>
+
 </html>
