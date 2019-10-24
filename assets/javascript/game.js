@@ -72,3 +72,38 @@ var game = [
 var winCount = 0;
 var lossCount = 0;
 var skipCount = 0;
+
+// when the player starts the game... run the following
+$("#start-btn").on("click", function() {
+	
+	// hide A screen (class=rules, id=start-btn)
+	$("#start-btn").hide();
+	$(".rules").hide(); 
+
+	// test and debug
+	console.log("start button pressed"); 
+
+	// display B screen (id=timer, id=subject, id=results)
+
+	// B - subect div - create div for question
+
+	var question = document.createElement("h2");
+	question.innerHTML= game[0].q; 
+	document.getElementById("#subject").appendChild(question);
+
+	// B - results div - create 4 buttons for answers
+	// https://www.w3schools.com/jsref/met_document_createelement.asp
+
+	var option1 = document.createElement("button");
+	option1.innerHTML = game[0].o[1]; 
+	document.getElementById("#results").appendChild(option1); 
+
+	// B - timer
+	
+
+	// test and debug 
+	console.log(game[0].q);
+	console.log(question);
+	console.log(game[0].o[1]);
+
+}); 
