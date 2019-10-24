@@ -87,19 +87,57 @@ $("#start-btn").on("click", function() {
 
 	// B - subect div - create div for question
 
-	var question = document.createElement("h2");
-	question.innerHTML= game[0].q; 
-	document.getElementById("#subject").appendChild(question);
-
 	// B - results div - create 4 buttons for answers
 	// https://www.w3schools.com/jsref/met_document_createelement.asp
 
-	var option1 = document.createElement("button");
-	option1.innerHTML = game[0].o[1]; 
-	document.getElementById("#results").appendChild(option1); 
+	function nextQuestion () {
+
+		// if counter is 
+
+	}
+
+	var question = document.createElement("h2");
+	question.innerHTML= game[0].q;
+	document.getElementById("subject").appendChild(question);
+
+	var options = document.createElement("button");
+	options.innerHTML = game[0].o[0];
+	document.getElementById("results").appendChild(options);
+
+	var options = document.createElement("button");
+	options.innerHTML = game[0].o[1];
+	document.getElementById("results").appendChild(options);
+
+	var options = document.createElement("button");
+	options.innerHTML = game[0].o[2];
+	document.getElementById("results").appendChild(options);
+
+	var options = document.createElement("button");
+	options.innerHTML = game[0].o[3];
+	document.getElementById("results").appendChild(options);
 
 	// B - timer
+
+	// function clockReset() {
+	// 	time = 0;
+	// 	lap = 1;
+	// 	$("#timer").text("00:30");
+	// };
 	
+	// function clockStart() {
+	// 	if (!clockRunning) {
+	// 	  intervalId = setInterval(count, -1000);
+	// 	  clockRunning = true;
+	// 	}
+	// };
+	
+	// function timerStop() {
+	// 	clearInterval(intervalId);
+	// 	clockRunning = false;
+	// };
+
+	// clockStart();
+	// document.getElementById("#subject").appendChild(clockStart);
 
 	// test and debug 
 	console.log(game[0].q);

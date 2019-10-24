@@ -19,10 +19,33 @@ body {
     text-align: center;
     font-family: 'Roboto Mono', monospace; 
     line-height: 20px;
+    background-color: black;
 }
 
 .bodycontainer { 
     width: 70%; 
+}
+
+div {
+    padding: 10px 25px;
+    margin-bottom: 10px 0px;
+}
+
+#timer {
+    width: 25%; 
+    margin: 0 auto;
+    background-color: red;
+}
+
+#subject {
+    background-color: white;
+}
+
+#results {
+    width: 80%; 
+    margin: 0 auto;
+    background-color: red; 
+    
 }
 
 li {
@@ -31,36 +54,14 @@ li {
 
 button {
     font-family: 'Roboto Mono', monospace; 
-    margin: 10px 0px;
-    min-width: 25%; 
+    margin: 10px auto;
+    min-width: 50%; 
     max-width: 80%;
+    display: block;
 }
 
 button:hover {
     box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
-}
-
-#timer {
-    height: 75px;
-    width: 25%; 
-    padding: 10px;
-    margin: 0 auto;
-    background-color: red;
-}
-
-#subtitle-timer-text {
-    margin: 0 auto;
-}
-
-#results {
-    width: 80%; 
-    margin: 0 auto;
-    background-color: red; 
-    padding: 10px 20px;
-}
-
-div {
-    padding: 5px 0px 5px 0px;
 }
 
 /* Only for Game Title */
@@ -68,7 +69,8 @@ h1 {
     display: block;
     font-size: 2.25em;
     font-family: 'Fascinate Inline', cursive; 
-    margin: 20px;
+    padding: 20px;
+    background-color: white;
 }
 
 /* Only for Question Text */
