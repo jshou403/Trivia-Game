@@ -89,52 +89,65 @@ var game = [
 // console.log("Fun Fact: " + game[7].ff);
 // console.log(game);
 
+var qIndex = 0;
 var winCount = 0;
 var lossCount = 0;
 var skipCount = 0;
+var timer; // WHAT DOES THIS DO? 
+var timeLeft = 10; // for question to be answered
+
+
 
 function nextQuestion() {
 
-		// Display timer
+	// Display timer
 
-		// DOESN'T WORK
-		// var displayTimeLeft = document.getElementById("timer").appendChild("div");
-		// displayTimeLeft.textContent("Time Left");
+	var timerDisplay = document.getElementById("timer");
 
-		// THIS WORKS
-		// var timeCount = 30; 
-		// $("#timer").text(timeCount + " seconds");
+	var timerDiv = document.createElement("h4");
+	timerDiv.textContent = "Time Left";
+	timerDisplay.appendChild(timerDiv);
 
-		// End Timer Code Test
+	var secondsDiv = document.createElement("div");
+	secondsDiv.innerHTML = timeLeft + " seconds";
+	timerDisplay.appendChild(secondsDiv);
 
-		// Display next question
-		var question = document.createElement("h2");
-		question.innerHTML = game[0].q;
-		document.getElementById("subject").appendChild(question);
+	// End Timer Code Test
 
-		// Display options 
-		var options = document.createElement("button");
-		options.innerHTML = game[0].o[0];
-		document.getElementById("results").appendChild(options);
+	// Display next question
+	var question = document.createElement("h2");
+	question.innerHTML = game[qIndex].q;
+	document.getElementById("subject").appendChild(question);
 
-		var options = document.createElement("button");
-		options.innerHTML = game[0].o[1];
-		document.getElementById("results").appendChild(options);
+	// Display options 
+	var option1 = document.createElement("button");
+	option1.innerHTML = game[qIndex].o[0];
+	document.getElementById("results").appendChild(option1);
 
-		var options = document.createElement("button");
-		options.innerHTML = game[0].o[2];
-		document.getElementById("results").appendChild(options);
+	var option2 = document.createElement("button");
+	option2.innerHTML = game[qIndex].o[1];
+	document.getElementById("results").appendChild(option2);
 
-		var options = document.createElement("button");
-		options.innerHTML = game[0].o[3];
-		document.getElementById("results").appendChild(options);
+	var option3 = document.createElement("button");
+	option3.innerHTML = game[qIndex].o[2];
+	document.getElementById("results").appendChild(option3);
 
-		// test and debug 
-		// console.log(question);
-		// console.log(game[0].q);
-		// console.log(game[0].o[1]);
+	var option4 = document.createElement("button");
+	option4.innerHTML = game[qIndex].o[3];
+	document.getElementById("results").appendChild(option4);
+
+	// test and debug 
+	console.log(game[qIndex].q);
+	console.log(game[qIndex].o[0]);
+	console.log(game[qIndex].o[1]);
+	console.log(game[qIndex].o[2]);
+	console.log(game[qIndex].o[3]);
 
 };
+
+function resultsPage() {
+	console.log("results page loaded!");
+}
 
 // when the player starts the game... run the following
 $("#start-btn").on("click", function () {
