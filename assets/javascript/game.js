@@ -93,26 +93,62 @@ var qIndex = 0;
 var winCount = 0;
 var lossCount = 0;
 var skipCount = 0;
-var timer; // WHAT DOES THIS DO? 
-var timeLeft = 10; // for question to be answered
+var timeLeft = 10; // seconds for question to be answered
+
+var intervalID = setInterval(counter, 1000);
+
+var clockRunning = false;
+var timeLeft = 10;
+var lap = 1;
+
+// when page loads - rule divs show
+$(".rules").show();
+
+// when page loads - timer div is hidden
+$("#timer").hide();
 
 
+function reset() {
+	timeLeft = 10;
+	lap = 1;
+
+	// DONE: Change the "display" div to "00:00."
+	$("#timerdisplay").text(timeLeft + " seconds");
+
+	// DONE: Empty the "laps" div.
+	// $("#laps").text("");
+}
+function start() {
+
+	// DONE: Use setInterval to start the count here and set the clock to running.
+	if (!clockRunning) {
+		intervalId = setInterval(count, 1000);
+		clockRunning = true;
+	}
+}
+function stop() {
+	// DONE: Use clearInterval to stop the count here and set the clock to not be running.
+	clearInterval(intervalId);
+	clockRunning = false;
+}
+
+function counter() {
+	--timeLeft;
+}
 
 function nextQuestion() {
 
-	// Display timer
+	$("#timer").show();
 
-	var timerDisplay = document.getElementById("timer");
+	// test & debug
+	console.log("timeLeft: " + timeLeft);
 
-	var timerDiv = document.createElement("h4");
-	timerDiv.textContent = "Time Left";
-	timerDisplay.appendChild(timerDiv);
+	reset();
 
-	var secondsDiv = document.createElement("div");
-	secondsDiv.innerHTML = timeLeft + " seconds";
-	timerDisplay.appendChild(secondsDiv);
-
-	// End Timer Code Test
+	if (timeLeft === 0) {
+		stop();
+		console.log("time's up and load results page next")
+	}
 
 	// Display next question
 	var question = document.createElement("h2");
@@ -137,16 +173,17 @@ function nextQuestion() {
 	document.getElementById("results").appendChild(option4);
 
 	// test and debug 
-	console.log(game[qIndex].q);
-	console.log(game[qIndex].o[0]);
-	console.log(game[qIndex].o[1]);
-	console.log(game[qIndex].o[2]);
-	console.log(game[qIndex].o[3]);
+	// console.log(game[qIndex].q);
+	// console.log(game[qIndex].o[0]);
+	// console.log(game[qIndex].o[1]);
+	// console.log(game[qIndex].o[2]);
+	// console.log(game[qIndex].o[3]);
 
 };
 
 function resultsPage() {
 	console.log("results page loaded!");
+
 }
 
 // when the player starts the game... run the following

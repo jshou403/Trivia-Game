@@ -30,10 +30,12 @@ div {
     margin-bottom: 10px 0px;
 }
 
-#timer {
+#subtitle {
     width: 25%; 
     margin: 0 auto;
     background-color: red;
+    padding: 0px;
+    margin-bottom: 0px;
 }
 
 #subject {
