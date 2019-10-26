@@ -22,7 +22,7 @@ var game = [
         q: "What is the name of the hotel Dale stay's at in Twin Peaks?",
         o: ["the Great Falls Lodge", "the Grand Northern Lodge", "the Great Northern Hotel", "Salish Lodge"],
         a: "the Great Northern Hotel",
-        ff: ""
+        ff: "Salish Lodge is the real name of the hotel currently."
     },
 
     // question 4 
@@ -133,7 +133,6 @@ function counter() {
         //go to results screen
         resultsPage();
 
-        console.log("Skipped #" + qIndex);
         console.log("Win Count: " + winCount);
         console.log("Loss Count: " + lossCount);
         console.log("Skip Count: " + skipCount);
@@ -141,16 +140,10 @@ function counter() {
 
 }
 
-// nextQuestion will reset the timer then start timer
-// nextQuestion will replace the question and options
-
 function nextQuestion() {
 
     $("#subject").empty();
     $("#results").empty();
-
-    // reset timer
-    reset();
 
     // start timer countdown
     start();
@@ -208,8 +201,6 @@ function resultsPage() {
     console.log("*Results Page Dispayed for 5 seconds*");
 
     if (qIndex == 9) {
-        stop();
-        reset();
         $("#subject").empty();
         $("#results").empty();
 
@@ -223,15 +214,18 @@ function resultsPage() {
         userScore.innerHTML = "<h5>Your Scores are:</h5></p><p>Wins - " + winCount + "</br>Losses - " + lossCount + "</br>Skipped - " + skipCount;
         document.getElementById("results").appendChild(userScore);
 
-    }
-    //
-    // *CHANGE 3000 to 5000* 
-    //
-    else {
-        stop();
+        // Display new button to restart game in #results div
+        var restartGame = document.createElement("button");
+        restartGame.setAttribute("class", "start-btn");
+        restartGame.innerHTML = "Play again!";
+        document.getElementById("results").appendChild(restartGame);
+
+        qIndex = 0;
+
+    } else {
         reset();
         qIndex++;
-        setTimeout(nextQuestion, 3000);
+        setTimeout(nextQuestion, 1000);
     }
 
 };
@@ -281,6 +275,8 @@ $("#start-btn").on("click", function () {
 
     // test and debug
     console.log("Game Start!");
+
+    reset();
 
     // display question
     nextQuestion();
