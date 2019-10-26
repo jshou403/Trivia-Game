@@ -29,6 +29,7 @@ var game = [
     {
         q: "Who does Dale speak to everyday but we never see?",
         o: ["Laura", "Donna", "Diane", "Bob", "Diane"],
+        a: ["Diane"],
         ff: "It's the first word spoken by Dale in the pilot episode."
     },
 
@@ -36,7 +37,8 @@ var game = [
     {
         q: "Who invites Icelandic business men to the Great Northern in an attempt to close a deal?",
         o: ["Leo and Bobby", "Jacques and Bernard", "Catherine and Ben", "Ben and Jerry"],
-        a: "Ben and Jerry"
+        a: "Ben and Jerry",
+        ff: ""
     },
 
     // question 6
@@ -88,7 +90,7 @@ var winCount = 0;
 var lossCount = 0;
 var skipCount = 0;
 
-var intervalID = setInterval(counter, 1000);
+var intervalID;
 
 var clockRunning = false;
 var timeLeft = 10;
@@ -119,12 +121,21 @@ function stop() {
 
 function counter() {
     console.log(--timeLeft);
-    // $("#timer").append("<div><h4>" + timeLeft + " seconds</h4></div>");
+    $("#timer").html("<div><h4>" + timeLeft + " seconds</h4></div>");
+
+    if (timeLeft == 0) {
+        stop();
+        skipCount++;
+        resultsPage();
+    } 
 }
 
 // nextQuestion will reset the timer then start timer
 // nextQuestion will replace the question and options
 function nextQuestion() {
+
+    $("#subject").empty();
+    $("#results").empty();
 
     // reset timer
     reset();
@@ -139,24 +150,55 @@ function nextQuestion() {
 
     // Display options 
     var option1 = document.createElement("button");
+    option1.setAttribute("class", "answer-buttons");
     option1.innerHTML = game[qIndex].o[0];
     document.getElementById("results").appendChild(option1);
 
     var option2 = document.createElement("button");
+    option2.setAttribute("class", "answer-buttons");
     option2.innerHTML = game[qIndex].o[1];
     document.getElementById("results").appendChild(option2);
 
     var option3 = document.createElement("button");
+    option3.setAttribute("class", "answer-buttons");
     option3.innerHTML = game[qIndex].o[2];
     document.getElementById("results").appendChild(option3);
 
     var option4 = document.createElement("button");
+    option4.setAttribute("class", "answer-buttons");
     option4.innerHTML = game[qIndex].o[3];
     document.getElementById("results").appendChild(option4);
 };
 
 function resultsPage() {
-    console.log("results page loaded!");
+
+    // test and debug
+    console.log("Results page loaded!");
+
+    // Empty #subject div (question) and #results (answer) div
+    $("#subject").empty();
+    $("#results").empty();
+
+    // Display correct answer in #subject div
+    var answer = document.createElement("h2");
+    answer.innerHTML = "The answer is <strong>" + game[qIndex].a + "!</strong>";
+    document.getElementById("subject").appendChild(answer);
+
+    // Display fun fact in #results div
+    var funfact = document.createElement("p");
+    funfact.innerHTML = game[qIndex].ff;
+    document.getElementById("results").appendChild(funfact);
+
+    if (qIndex < 0){
+        console.log("Game over!"); 
+
+    } else {
+        qIndex++;
+
+        setTimeout(nextQuestion, 3000);
+    }
+
+    $("#timer").empty();
 }
 
 // when the player starts the game... run the following
@@ -175,5 +217,23 @@ $("#start-btn").on("click", function () {
 
     // test and debug
     // console.log("start button pressed");
+
+});
+
+$(document).on("click", ".answer-buttons", function() {
+
+    var userAnswer = $(this).text();
+    console.log(userAnswer);
+
+    if (userAnswer == game[qIndex].a) {
+        console.log(game[qIndex].a);
+    };
+
+    stop();
+    resultsPage();
+
+    // test and debug
+    console.log("USER CHOSE ANSWER: " + userAnswer);
+    console.log("Correct Answer: " + game[qIndex].a);
 
 });
