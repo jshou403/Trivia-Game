@@ -175,6 +175,8 @@ function resultsPage() {
     // test and debug
     console.log("Results page loaded!");
 
+    $("#timer").show();
+
     // Empty #subject div (question) and #results (answer) div
     $("#subject").empty();
     $("#results").empty();
@@ -198,7 +200,7 @@ function resultsPage() {
         setTimeout(nextQuestion, 3000);
     }
 
-    $("#timer").empty();
+    // $("#timer").empty();
 }
 
 // when the player starts the game... run the following
