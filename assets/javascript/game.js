@@ -97,16 +97,15 @@ var timeLeft = 10;
 var lap = 1;
 
 function reset() {
+
     timeLeft = 10;
     lap = 1;
 
-    // DONE: Change the "display" div to "00:00."
-    $("#timer").show();
     $("#timer").append("<div><h4>" + timeLeft + " seconds</h4></div>");
 }
 
 function start() {
-    // DONE: Use setInterval to start the count here and set the clock to running.
+
     if (!clockRunning) {
         intervalId = setInterval(counter, 1000);
         clockRunning = true;
@@ -114,24 +113,37 @@ function start() {
 }
 
 function stop() {
-    // DONE: Use clearInterval to stop the count here and set the clock to not be running.
+
     clearInterval(intervalId);
     clockRunning = false;
+
 }
 
 function counter() {
-    console.log(--timeLeft);
+
+    --timeLeft;
     $("#timer").html("<div><h4>" + timeLeft + " seconds</h4></div>");
 
     if (timeLeft == 0) {
-        stop();
         skipCount++;
+
+        //stop timer
+        stop();
+
+        //go to results screen
         resultsPage();
-    } 
+
+        console.log("Skipped #" + qIndex);
+        console.log("Win Count: " + winCount);
+        console.log("Loss Count: " + lossCount);
+        console.log("Skip Count: " + skipCount);
+    }
+
 }
 
 // nextQuestion will reset the timer then start timer
 // nextQuestion will replace the question and options
+
 function nextQuestion() {
 
     $("#subject").empty();
@@ -143,7 +155,7 @@ function nextQuestion() {
     // start timer countdown
     start();
 
-    // Display next question
+    // Display question
     var question = document.createElement("h2");
     question.innerHTML = game[qIndex].q;
     document.getElementById("subject").appendChild(question);
@@ -168,74 +180,109 @@ function nextQuestion() {
     option4.setAttribute("class", "answer-buttons");
     option4.innerHTML = game[qIndex].o[3];
     document.getElementById("results").appendChild(option4);
+
+    // test and debug
+    console.log(qIndex + " Question =" + game[qIndex].q);
+    console.log(qIndex + " a. " + game[qIndex].o[0]);
+    console.log(qIndex + " b. " + game[qIndex].o[1]);
+    console.log(qIndex + " c. " + game[qIndex].o[2]);
+    console.log(qIndex + " d. " + game[qIndex].o[3]);
+
 };
 
 function resultsPage() {
 
-    // test and debug
-    console.log("Results page loaded!");
-
-    $("#timer").show();
-
-    // Empty #subject div (question) and #results (answer) div
-    $("#subject").empty();
+    // Empty #results div
     $("#results").empty();
 
-    // Display correct answer in #subject div
-    var answer = document.createElement("h2");
-    answer.innerHTML = "The answer is <strong>" + game[qIndex].a + "!</strong>";
-    document.getElementById("subject").appendChild(answer);
+    // Display correct answer in #results div
+    var answer = document.createElement("h3");
+    answer.innerHTML = "Correct Answer: " + game[qIndex].a + "!</br></br>";
+    document.getElementById("results").appendChild(answer);
 
     // Display fun fact in #results div
     var funfact = document.createElement("p");
-    funfact.innerHTML = game[qIndex].ff;
+    funfact.innerHTML = "<h5>Did You Know?</h5></p><p>" + game[qIndex].ff;
     document.getElementById("results").appendChild(funfact);
 
-    if (qIndex < 0){
-        console.log("Game over!"); 
+    console.log("*Results Page Dispayed for 5 seconds*");
 
-    } else {
+    if (qIndex == 9) {
+        stop();
+        reset();
+        $("#subject").empty();
+        $("#results").empty();
+
+        // Display "Game Over" in #subject div
+        var gameOver = document.createElement("h2");
+        gameOver.innerHTML = "Game Over!";
+        document.getElementById("subject").appendChild(gameOver);
+
+        // Display User's Score in #results div
+        var userScore = document.createElement("p");
+        userScore.innerHTML = "<h5>Your Scores are:</h5></p><p>Wins - " + winCount + "</br>Losses - " + lossCount + "</br>Skipped - " + skipCount;
+        document.getElementById("results").appendChild(userScore);
+
+    }
+    //
+    // *CHANGE 3000 to 5000* 
+    //
+    else {
+        stop();
+        reset();
         qIndex++;
-
         setTimeout(nextQuestion, 3000);
     }
 
-    // $("#timer").empty();
-}
+};
 
-// when the player starts the game... run the following
-// hide rules 
-// run nextQuestion()
-$("#start-btn").on("click", function () {
+$(document).on("click", ".answer-buttons", function () {
 
-    // hide A screen - class=rules
-    $(".rules").hide();
+    var userAnswer = $(this).text();
+    console.log("UserChoose - " + userAnswer);
+    console.log(qIndex + " Answer = " + game[qIndex].a);
 
-    // run nextQuestion which will 
-    // display B screen: 
-    // id=subject -> questions
-    // id=results -> option
-    nextQuestion();
+    if (userAnswer === game[qIndex].a) {
+        winCount++;
 
-    // test and debug
-    // console.log("start button pressed");
+        console.log("Win Count: " + winCount);
+        console.log("Loss Count: " + lossCount);
+        console.log("Skip Count: " + skipCount);
+
+        //stop timer
+        stop();
+
+        //go to results screen
+        resultsPage();
+
+
+    } else {
+        lossCount++;
+        console.log("Win Count: " + winCount);
+        console.log("Loss Count: " + lossCount);
+        console.log("Skip Count: " + skipCount);
+
+        //stop timer
+        stop();
+
+        //go to results screen
+        resultsPage();
+    };
 
 });
 
-$(document).on("click", ".answer-buttons", function() {
+$("#start-btn").on("click", function () {
 
-    var userAnswer = $(this).text();
-    console.log(userAnswer);
+    // hide divs with class=rules
+    $(".rules").hide();
 
-    if (userAnswer == game[qIndex].a) {
-        console.log(game[qIndex].a);
-    };
-
-    stop();
-    resultsPage();
+    // show 
+    $("#timer").show();
 
     // test and debug
-    console.log("USER CHOSE ANSWER: " + userAnswer);
-    console.log("Correct Answer: " + game[qIndex].a);
+    console.log("Game Start!");
+
+    // display question
+    nextQuestion();
 
 });
