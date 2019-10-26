@@ -223,9 +223,10 @@ function resultsPage() {
         qIndex = 0;
 
     } else {
+        console.log("3 seconds until next question")
         reset();
         qIndex++;
-        setTimeout(nextQuestion, 1000);
+        setTimeout(nextQuestion, 3000);
     }
 
 };
